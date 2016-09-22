@@ -10,7 +10,6 @@
 
 using namespace std;
 
-
 class Heap {
 private:
     vector<int> heap;

@@ -1,7 +1,6 @@
 //
 // Created by danza on 22.9.2016.
 //
-
 #include "Heap.h"
 
 Heap::Heap() {
