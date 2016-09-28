@@ -14,13 +14,13 @@ void Queue::add(int element) {
 }
 
 int Queue::get() {
-    if(elements.size() == 0)
+    if(elements.empty())
         return numeric_limits<int>::min();
     return elements[0];
 }
 
 int Queue::pull() {
-    if(get() != numeric_limits<int>::min()) {
+    if(!elements.empty()) {
         int first_element = elements[0];
         elements.erase(elements.begin());
         return first_element;
