@@ -1,30 +1,57 @@
 #include <iostream>
-#include "BstNode.h"
+#include <vector>
+#include <queue>
 
 using namespace std;
 
 
 int main() {
-    BstNode bst;
-    BstNode* root;
-    root = NULL;
-    bst.insert(root, 8);
-    bst.insert(root, 3);
-    bst.insert(root, 45);
-    bst.insert(root, 27);
-    bst.insert(root, 9);
-    bst.insert(root, 34);
-    bst.insert(root, 23);
-    bst.insert(root, 11);
-    bst.insert(root, 2);
-    bst.insert(root, 6);
+    int n;
+    cin >> n;
 
-    bst.bfs_print_all(root, 0);
-    cout << endl;
-    bst.bfs_print_all(root, 1);
-    cout << endl;
-    bst.bfs_print_all(root, 2);
-    cout << endl;
+    vector<string> result;
+    vector<pair<int, string>> static_contestants;
+
+    bool is_plus = false, is_minus = false;
+    char sign, first_sign = '0', last_sign = '0';
+    string name;
+    pair<int, string> static_member;
+    for(int i = 0; i < n; i++) {
+        cin >> sign >> name;
+        if(first_sign == '0') {
+            if(sign != '0')
+                first_sign = sign;
+        }
+        if(sign != '0')
+            last_sign = sign;
+        if(sign == '+') {
+            result.push_back(name);
+            is_plus = true;
+        }
+        else if(sign == '-') {
+            result.insert(result.begin(), name);
+            is_minus = true;
+        }
+        else {
+            static_member.first = i;
+            static_member.second = name;
+            static_contestants.push_back(static_member);
+        }
+    }
+
+    if((is_plus != is_minus) || first_sign == '-' || last_sign == '+') {
+        cout << "FAIL" << endl;
+    }
+    else {
+        int static_amount = static_contestants.size();
+        for(int i = 0; i < static_amount; i++) {
+            result.insert(result.begin() + static_contestants[i].first, static_contestants[i].second);
+        }
+        cout << "OK" << endl;
+        for(int i = 0; i < result.size(); i++)
+            cout << result[i] << endl;
+    }
+
 
     return 0;
 }
