@@ -41,7 +41,7 @@ double PolishNotation::rpn_expression_evaluate_from_input() {
 
 vector<char> PolishNotation::in2rpn_from_input() {
     stack<char> operators;
-    vector<int> result;
+    vector<char> result;
     map<char, int> operators_priority;
     operators_priority['('] = 0;
     operators_priority[')'] = 0;
@@ -75,12 +75,11 @@ vector<char> PolishNotation::in2rpn_from_input() {
         }
     }
 
-    for (int j = 0; j < result.size(); j++)
-        cout << (char) result[j];
     int operators_size = operators.size();
     for (int j = 0; j < operators_size; j++) {
-        cout << (char) operators.top();
+        result.push_back(operators.top());
         operators.pop();
     }
-    cout << endl;
+
+    return result;
 }
