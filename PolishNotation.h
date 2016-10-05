@@ -13,7 +13,7 @@ using namespace std;
 
 class PolishNotation {
 private:
-    static map<char, int> operators_priority;
+    map<char, int> operators_priority;
 public:
     PolishNotation();
     double rpn_expression_evaluate_from_input();
