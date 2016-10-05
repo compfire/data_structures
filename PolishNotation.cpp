@@ -11,6 +11,16 @@
 using namespace std;
 
 
+PolishNotation::PolishNotation() {
+    operators_priority['('] = 0;
+    operators_priority[')'] = 0;
+    operators_priority['+'] = 1;
+    operators_priority['-'] = 1;
+    operators_priority['*'] = 2;
+    operators_priority['/'] = 2;
+    operators_priority['^'] = 3;
+}
+
 double PolishNotation::rpn_expression_evaluate_from_input() {
     char c;
     stack<double > opers;
@@ -42,15 +52,6 @@ double PolishNotation::rpn_expression_evaluate_from_input() {
 vector<char> PolishNotation::in2rpn_from_input() {
     stack<char> operators;
     vector<char> result;
-    map<char, int> operators_priority;
-    operators_priority['('] = 0;
-    operators_priority[')'] = 0;
-    operators_priority['+'] = 1;
-    operators_priority['-'] = 1;
-    operators_priority['*'] = 2;
-    operators_priority['/'] = 2;
-    operators_priority['^'] = 3;
-
     char c, out_c;
     while ((c = getchar()) != '\n') {
         if (c >= 97 && c <= 122)
@@ -81,5 +82,37 @@ vector<char> PolishNotation::in2rpn_from_input() {
         operators.pop();
     }
 
+    return result;
+}
+
+vector<char> PolishNotation::in2rpn(vector<char> in) {
+    stack<char> operators;
+    vector<char> result;
+    for(int i = 0; i < in.size(); i++) {
+        if((in[i] - '0' >= 0 && in[i] - '0' <= 9) || in[i] >= 97 && in[i] <= 122)
+            result.push_back(in[i]);
+        else {
+            if(in[i] == ')') {
+                while (!operators.empty() && operators.top() != '(') {
+                    result.push_back(operators.top());
+                    operators.pop();
+                }
+                operators.pop();
+                continue;
+            }
+            else if(operators.empty() || operators_priority[in[i]] > operators_priority[operators.top()])
+                operators.push(in[i]);
+            else {
+                while(!operators.empty() && operators_priority[operators.top()] >= operators_priority[in[i]]) {
+                    result.push_back(operators.top());
+                    operators.pop();
+                }
+            }
+        }
+    }
+    while(!operators.empty()) {
+        result.push_back(operators.top());
+        operators.pop();
+    }
     return result;
 }
