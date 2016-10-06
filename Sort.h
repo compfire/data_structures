@@ -21,6 +21,7 @@ public:
     int partition(vector<int> &to_sort, int start, int end);
     void merge_sort(vector<int> &to_sort, int start, int end);
     void merge(vector<int> &merge_from, int start, int mid, int end);
+    void counting_sort(vector<int> &to_sort);
 };
 
 

@@ -3,8 +3,12 @@
 //
 
 #include "Sort.h"
+#include <iostream>
 #include <vector>
 #include <limits>
+
+using namespace std;
+
 
 void Sort::bubble_sort(vector<int> &to_sort) {
     for(int i = 0; i < to_sort.size(); i++) {
@@ -92,6 +96,26 @@ void Sort::merge(vector<int> &merge_from, int start, int mid, int end) {
     }
     for(int i = start; i < end; i++)
         merge_from[i] = merge_to[i - start];
+}
+
+void Sort::counting_sort(vector<int> &to_sort) {
+    int max_num = numeric_limits<int>::min();
+    for(int i = 0; i < to_sort.size(); i++)
+        if(to_sort[i] > max_num)
+            max_num = to_sort[i];
+    int indexes[max_num + 1];
+    for(int i = 0; i <= max_num; i++)
+        indexes[i] = 0;
+    cout << endl;
+    for(int i = 0; i < to_sort.size(); i++)
+        indexes[to_sort[i]]++;
+    for(int i = 1; i <= max_num; i++)
+        indexes[i] += indexes[i - 1];
+    int sorted[to_sort.size()];
+    for(int i = to_sort.size() - 1; i >= 0; i--)
+        sorted[--indexes[to_sort[i]]] = to_sort[i];
+    for(int i = 0; i < to_sort.size(); i++)
+        to_sort[i] = sorted[i];
 }
 
 

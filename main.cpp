@@ -10,10 +10,11 @@ int main() {
     srand(time(NULL));
     Sort sorter;
     vector<int> nums;
-    for(int i = 0; i < 10; i++)
-        nums.push_back(rand() % 30);
-
-    sorter.merge_sort(nums, 0, nums.size());
+    for(int i = 0; i < 5; i++) {
+        nums.push_back(rand() % 10);
+        cout << nums[i] << " ";
+    }
+    sorter.counting_sort(nums);
     for(int i = 0; i < nums.size(); i++)
         cout << nums[i] << " ";
 
