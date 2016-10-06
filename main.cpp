@@ -13,7 +13,7 @@ int main() {
     for(int i = 0; i < 10; i++)
         nums.push_back(rand() % 30);
 
-    sorter.quick_sort(nums, 0, nums.size() - 1);
+    sorter.merge_sort(nums, 0, nums.size());
     for(int i = 0; i < nums.size(); i++)
         cout << nums[i] << " ";
 

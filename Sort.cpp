@@ -60,6 +60,40 @@ int Sort::partition(vector<int> &to_sort, int start, int end) {
     return p_index;
 }
 
+void Sort::merge_sort(vector<int> &to_sort, int start, int end) {
+    if(end - start < 2)
+        return;
+    int mid = (start + end) / 2;
+    merge_sort(to_sort, start, mid);
+    merge_sort(to_sort, mid, end);
+    merge(to_sort, start, mid, end);
+}
+
+void Sort::merge(vector<int> &merge_from, int start, int mid, int end) {
+    int left_index = start, right_index = mid;
+    merge_to.clear();
+    while(left_index < mid && right_index < end) {
+        if(merge_from[left_index] < merge_from[right_index]) {
+            merge_to.push_back(merge_from[left_index]);
+            left_index++;
+        }
+        else {
+            merge_to.push_back(merge_from[right_index]);
+            right_index++;
+        }
+    }
+    while(left_index < mid) {
+        merge_to.push_back(merge_from[left_index]);
+        left_index++;
+    }
+    while(right_index < end) {
+        merge_to.push_back(merge_from[right_index]);
+        right_index++;
+    }
+    for(int i = start; i < end; i++)
+        merge_from[i] = merge_to[i - start];
+}
+
 
 
 
