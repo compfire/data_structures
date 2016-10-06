@@ -1,4 +1,4 @@
-#include "Sort.h"
+#include "PolishNotation.h"
 #include <iostream>
 #include <cmath>
 #include <ctime>
@@ -8,16 +8,11 @@ using namespace std;
 
 int main() {
     srand(time(NULL));
-    Sort sorter;
-    vector<int> nums;
-    for(int i = 0; i < 5; i++) {
-        nums.push_back(rand() % 10);
-        cout << nums[i] << " ";
-    }
-    sorter.counting_sort(nums);
-    for(int i = 0; i < nums.size(); i++)
-        cout << nums[i] << " ";
-
+    PolishNotation pn;
+    vector<char> rpn;
+    rpn = pn.in2rpn_from_input();
+    for(int i = 0; i < rpn.size(); i++)
+        cout << rpn[i];
 
     return 0;
 }

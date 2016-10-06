@@ -54,7 +54,9 @@ vector<char> PolishNotation::in2rpn_from_input() {
     vector<char> result;
     char c, out_c;
     while ((c = getchar()) != '\n') {
-        if (c >= 97 && c <= 122)
+        if(c == ' ')
+            continue;
+        if ((c >= 97 && c <= 122) || c - '0' >= 0 && c - '0' <= 9)
             result.push_back(c);
         else {
             if (c == ')') {
