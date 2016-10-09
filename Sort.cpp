@@ -75,30 +75,49 @@ void Sort::merge_sort(vector<int> &to_sort, int start, int end) {
 
 void Sort::merge(vector<int> &merge_from, int start, int mid, int end) {
     int left_index = start, right_index = mid;
-    merge_to.clear();
+    temp_vec.clear();
     while(left_index < mid && right_index < end) {
         if(merge_from[left_index] < merge_from[right_index]) {
-            merge_to.push_back(merge_from[left_index]);
+            temp_vec.push_back(merge_from[left_index]);
             left_index++;
         }
         else {
-            merge_to.push_back(merge_from[right_index]);
+            temp_vec.push_back(merge_from[right_index]);
             right_index++;
         }
     }
     while(left_index < mid) {
-        merge_to.push_back(merge_from[left_index]);
+        temp_vec.push_back(merge_from[left_index]);
         left_index++;
     }
     while(right_index < end) {
-        merge_to.push_back(merge_from[right_index]);
+        temp_vec.push_back(merge_from[right_index]);
         right_index++;
     }
     for(int i = start; i < end; i++)
-        merge_from[i] = merge_to[i - start];
+        merge_from[i] = temp_vec[i - start];
 }
 
 void Sort::counting_sort(vector<int> &to_sort) {
+    int max_num = numeric_limits<int>::min();
+    for(int i = 0; i < to_sort.size(); i++)
+        if(to_sort[i] > max_num)
+            max_num = to_sort[i];
+    int amounts[max_num + 1];
+    for(int i = 0; i <= max_num; i++)
+        amounts[i] = 0;
+    for(int i = 0; i < to_sort.size(); i++)
+        amounts[to_sort[i]]++;
+    to_sort.clear();
+    for(int i = 0; i <= max_num; i++) {
+        while(amounts[i] > 0) {
+            to_sort.push_back(i);
+            amounts[i]--;
+        }
+    }
+}
+
+void Sort::counting_sort2(vector<int> &to_sort) {
     int max_num = numeric_limits<int>::min();
     for(int i = 0; i < to_sort.size(); i++)
         if(to_sort[i] > max_num)
@@ -118,6 +137,33 @@ void Sort::counting_sort(vector<int> &to_sort) {
         to_sort[i] = sorted[i];
 }
 
+void Sort::radix_sort(vector<int> &to_sort) {
+    bool finished = false;
+    int modulus_number = 1;
+    int radix[10];
+    int result[to_sort.size()];
+    while(!finished) {
+        modulus_number *= 10;
+        finished = true;
+        for (int i = 0; i < 10; i++)
+            radix[i] = 0;
+        for (int i = 0; i < to_sort.size(); i++) {
+            if(to_sort[i] < modulus_number / 10 && to_sort[i] > 9)
+                radix[0]++;
+            else
+                radix[(to_sort[i] / (modulus_number / 10)) % modulus_number]++;
+        }
+        for (int i = 1; i < 10; i++)
+            radix[i] += radix[i - 1];
+        for (int i = to_sort.size() - 1; i >= 0; i--)
+            result[--radix[(to_sort[i] / (modulus_number / 10)) % modulus_number]] = to_sort[i];
+        for (int i = 0; i < to_sort.size(); i++) {
+            to_sort[i] = result[i];
+            if (to_sort[i] >= modulus_number)
+                finished = false;
+        }
+    }
+}
 
 
 

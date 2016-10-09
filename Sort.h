@@ -12,7 +12,7 @@ using namespace std;
 
 class Sort {
 private:
-    vector<int> merge_to;
+    vector<int> temp_vec;
 public:
     void bubble_sort(vector<int> &to_sort);
     void selection_sort(vector<int> &to_sort);
@@ -22,6 +22,8 @@ public:
     void merge_sort(vector<int> &to_sort, int start, int end);
     void merge(vector<int> &merge_from, int start, int mid, int end);
     void counting_sort(vector<int> &to_sort);
+    void counting_sort2(vector<int> &to_sort);
+    void radix_sort(vector<int> &to_sort);
 };
 
 
