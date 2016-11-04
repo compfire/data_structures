@@ -77,23 +77,15 @@ void Sort::merge(vector<int> &merge_from, int start, int mid, int end) {
     int left_index = start, right_index = mid;
     temp_vec.clear();
     while(left_index < mid && right_index < end) {
-        if(merge_from[left_index] < merge_from[right_index]) {
-            temp_vec.push_back(merge_from[left_index]);
-            left_index++;
-        }
-        else {
-            temp_vec.push_back(merge_from[right_index]);
-            right_index++;
-        }
+        if(merge_from[left_index] < merge_from[right_index])
+            temp_vec.push_back(merge_from[left_index++]);
+        else
+            temp_vec.push_back(merge_from[right_index++]);
     }
-    while(left_index < mid) {
-        temp_vec.push_back(merge_from[left_index]);
-        left_index++;
-    }
-    while(right_index < end) {
-        temp_vec.push_back(merge_from[right_index]);
-        right_index++;
-    }
+    while(left_index < mid)
+        temp_vec.push_back(merge_from[left_index++]);
+    while(right_index < end)
+        temp_vec.push_back(merge_from[right_index++]);
     for(int i = start; i < end; i++)
         merge_from[i] = temp_vec[i - start];
 }
