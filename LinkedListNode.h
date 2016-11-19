@@ -12,7 +12,8 @@ private:
     LinkedListNode* next;
 public:
     LinkedListNode* get_new_node(int data);
-    void add(LinkedListNode* &root, int data);
+    void insert(LinkedListNode* &root, int data);
+    void remove(LinkedListNode* &root, int index);
     void print(LinkedListNode* root);
 };
 

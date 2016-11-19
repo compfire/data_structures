@@ -15,11 +15,23 @@ LinkedListNode* LinkedListNode::get_new_node(int data) {
     return new_node;
 }
 
-void LinkedListNode::add(LinkedListNode* &root, int data) {
+void LinkedListNode::insert(LinkedListNode* &root, int data) {
     if(root == NULL) {
         root = get_new_node(data);
+        return;
     }
-    add(root->next, data);
+    insert(root->next, data);
+}
+
+void LinkedListNode::remove(LinkedListNode *&root, int index) {
+    LinkedListNode* act_node = root;
+    for(int i = 0; i < index - 1; i++) {
+        act_node = act_node->next;
+        if(act_node == NULL) return;
+    }
+    LinkedListNode* temp = act_node->next;
+    act_node->next = act_node->next->next;
+    delete(temp);
 }
 
 void LinkedListNode::print(LinkedListNode *root) {
@@ -28,26 +40,3 @@ void LinkedListNode::print(LinkedListNode *root) {
     cout << root->data << ", ";
     print(root->next);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
