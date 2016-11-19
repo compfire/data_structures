@@ -3,20 +3,15 @@
 //
 
 #include "GraphTraversal.h"
-#include <iostream>
-#include <vector>
-#include <limits>
+#include <bits/stdc++.h>
 
 int GraphTraversal::dijkstra_shortest_path_length(vector<vector<pair<int, int>>> &in_graph, int from, int to) {
     vector<Node> graph(in_graph.size());
     bool explored_all = false;
     int minim, min_i = from;
-    for(int i = 0; i < graph.size(); i++) {
-        graph[i].value = numeric_limits<int>::max() / 10;
+    for(int i = 0; i < graph.size(); i++)
         for(int j = 0; j < in_graph[i].size(); j++)
             graph[i].paths.push_back(make_pair(in_graph[i][j].first, in_graph[i][j].second));
-    }
-
     graph[from].value = 0;
     graph[from].explored = true;
     while(!explored_all) {
@@ -37,6 +32,5 @@ int GraphTraversal::dijkstra_shortest_path_length(vector<vector<pair<int, int>>>
         from = min_i;
         graph[min_i].explored = true;
     }
-
     return graph[to].value;
 }

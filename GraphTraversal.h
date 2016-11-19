@@ -5,15 +5,14 @@
 #ifndef COMPLOOK_GRAPHTRAVERSAL_H
 #define COMPLOOK_GRAPHTRAVERSAL_H
 
-#include <vector>
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 class GraphTraversal {
 private:
     struct Node {
-        int value;
+        int value = numeric_limits<int>::max() / 10;
         vector<pair<int, int>> paths;
         bool explored = false;
     };
