@@ -9,10 +9,9 @@ using namespace std;
 
 
 class IntervalTree {
-public:
     vector<int> interval_tree;
     int n;
-
+public:
     IntervalTree(vector<int> &invec);
     void update(int index, int value);
     int sum(int from, int to);
