@@ -1,16 +1,16 @@
-#include <iostream>
-#include <vector>
-#include <ctime>
-#include "IntervalTree.h"
+#include <bits/stdc++.h>
+#include "UnionFindDisjointSets.h"
 
 using namespace std;
 
-
 int main() {
-    vector<int> in = {1, 2, 3, 4, 5};
-    IntervalTree intertree(in);
-    intertree.update(1, 100);
-    cout << intertree.sum(1, 5) << endl;
+    UnionFindDisjointSets ufds(10);
+    ufds.union_set(1, 2);
+    ufds.union_set(1, 0);
+    cout << ufds.is_same_set(0, 1) << endl;
+    cout << ufds.is_same_set(0, 2) << endl;
+    cout << ufds.is_same_set(1, 2) << endl;
+    cout << ufds.is_same_set(1, 5) << endl;
 
 
     return 0;

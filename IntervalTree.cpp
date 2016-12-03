@@ -25,7 +25,7 @@ IntervalTree::IntervalTree(vector<int> &invec) {
 
 
 void IntervalTree::update(int index, int value) {
-    int act = interval_tree.size() - 1 - n;
+    int act = interval_tree.size() - 1 - n + index;
     do {
         interval_tree[act] += value;
     } while(act /= 2);
