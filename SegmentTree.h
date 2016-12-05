@@ -20,6 +20,7 @@ private:
 public:
     SegmentTree(const vector<int> &_A);
     int rmq(int i, int j);
+    void update(int p, int val);
 };
 
 

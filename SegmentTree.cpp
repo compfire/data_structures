@@ -46,45 +46,22 @@ int SegmentTree::rmq(int i, int j) {
     return rmq(1, 0, n - 1, i, j);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void SegmentTree::update(int p, int val) {
+    if(p > st.size() - 1) return;
+    A[p] = val;
+    while(p > 1) {
+        if (p % 2 == 0) {
+            if (p + 1 < st.size()) {
+                int p1 = A[p], p2 = A[p + 1];
+                p /= 2;
+                st[p] = (A[p1] <= A[p2]) ? p1 : p2;
+            }
+            else p /= 2;
+        }
+        else {
+            int p1 = A[p], p2 = A[p - 1];
+            p /= 2;
+            st[p] = (A[p1] < A[p2]) ? p1 : p2;
+        }
+    }
+}

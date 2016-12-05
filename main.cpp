@@ -11,6 +11,8 @@ int main() {
     SegmentTree st(A);
     cout << "RMQ(1, 3) = " << st.rmq(1, 3) << endl;
     cout << "RMQ(4, 6) = " << st.rmq(4, 6) << endl;
+    st.update(1, 1);
+    cout << "RMQ(1, 3) = " << st.rmq(1, 3) << endl;
 
     return 0;
 }
