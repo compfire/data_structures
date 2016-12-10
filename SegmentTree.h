@@ -12,7 +12,7 @@ using namespace std;
 class SegmentTree {
 private:
     vector<int> st, A;
-    int n;
+    int n, end, start;
     int left(int p);
     int right(int p);
     void build(int p, int L, int R);

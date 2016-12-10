@@ -60,12 +60,13 @@ vector<char> PolishNotation::in2rpn_from_input() {
             result.push_back(c);
         else {
             if (c == ')') {
-                while (operators.top() != '(') {
+                while(operators.top() != '(') {
                     result.push_back(operators.top());
                     operators.pop();
                 }
                 operators.pop();
-            } else if (operators.empty() || operators_priority[operators.top()] < operators_priority[c] || c == '(')
+            }
+            else if (operators.empty() || operators_priority[operators.top()] < operators_priority[c] || c == '(')
                 operators.push(c);
             else {
                 while (!operators.empty() && operators_priority[operators.top()] > operators_priority[c]) {

@@ -6,13 +6,18 @@ using namespace std;
 typedef vector<int> vi;
 
 int main() {
-    int arr[] = {18, 17, 13, 19, 15, 11, 20};
-    vi A(arr, arr + 7);
-    SegmentTree st(A);
-    cout << "RMQ(1, 3) = " << st.rmq(1, 3) << endl;
-    cout << "RMQ(4, 6) = " << st.rmq(4, 6) << endl;
-    st.update(1, 1);
-    cout << "RMQ(1, 3) = " << st.rmq(1, 3) << endl;
-
+    vi arr = {9, 2, 3, 4, 2};
+    SegmentTree st(arr);
+    cout << st.rmq(0, 4) << endl;
+    cout << st.rmq(3, 3) << endl;
+    cout << st.rmq(3, 4) << endl;
+    st.update(0, -100);
+    cout << st.rmq(0, 4) << endl;
+    st.update(0, 100);
+    cout << st.rmq(0, 4) << endl;
+    st.update(0, -100);
+    cout << st.rmq(0, 4) << endl;
+    st.update(0, 100);
+    cout << st.rmq(0, 4) << endl;
     return 0;
 }
