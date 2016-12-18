@@ -17,7 +17,9 @@ private:
         bool explored = false;
     };
 public:
+    struct Edge { int to, length; };
     int dijkstra_shortest_path_length(vector<vector<pair<int, int>>> &in_graph, int from, int to);
+    int dijkstra(vector<vector<Edge>> &graph, int source, int target);
 };
 
 
