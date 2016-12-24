@@ -10,17 +10,17 @@
 using namespace std;
 
 class SegmentTree {
-private:
+public:
     vector<int> st, A;
-    int n, end, start;
+    int n;
     int left(int p);
     int right(int p);
     void build(int p, int L, int R);
     int rmq(int p, int L, int R, int i, int j);
-public:
+    int update(int p, int L, int R, int i, int val);
     SegmentTree(const vector<int> &_A);
     int rmq(int i, int j);
-    void update(int p, int val);
+    int update(int i, int val);
 };
 
 
