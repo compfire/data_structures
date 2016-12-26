@@ -15,44 +15,42 @@ LazyLoadingSegmentTree::LazyLoadingSegmentTree(vector<int> &_A) {
 int LazyLoadingSegmentTree::left(int p) { return p << 1; }
 int LazyLoadingSegmentTree::right(int p) { return p << 1 | 1; }
 
-void LazyLoadingSegmentTree::build(int p, int L, int R) {
-    if(L == R) st[p] = A[L];
-    else {
-        build(left(p), L, (L + R) >> 1);
-        build(right(p), ((L + R) >> 1) + 1, R);
-        st[p] = max(st[left(p)], st[right(p)]);
-    }
+int LazyLoadingSegmentTree::build(int p, int L, int R) {
+    if(L == R) return st[p] = A[L];
+    build(left(p), L, (L + R) >> 1);
+    build(right(p), ((L + R) >> 1) + 1, R);
+    return st[p] = max(st[left(p)], st[right(p)]);
 }
 
 int LazyLoadingSegmentTree::rmq(int p, int L, int R, int i, int j) {
-    if(j < L || i > R) return -1;
-    if(i <= L && j >= R) {
+    if(j < L || i > R) return 0;
+    if(i <= L && j >= R) return st[p] + lz[p];
+    if(lz[p] != 0) {
         st[p] += lz[p];
-        if(L != R) {
-            lz[left(p)] += lz[p];
-            lz[right(p)] += lz[p];
-        }
+        lz[left(p)] += lz[p];
+        lz[right(p)] += lz[p];
         lz[p] = 0;
-        return st[p];
     }
     int p1 = rmq(left(p), L, (L + R) >> 1, i, j);
     int p2 = rmq(right(p), ((L + R) >> 1) + 1, R, i, j);
-    if(p1 == -1) return p2;
-    if(p2 == -1) return p1;
     return max(p1, p2);
 }
 
 int LazyLoadingSegmentTree::update(int p, int L, int R, int i, int j, int val) {
-    if(j < L || i > R) return -1;
+    if(j < L || i > R) return st[p] + lz[p];
     if(L >= i && R <= j) {
-        st[p] += lz[p] + val;
-        if(L != R) {
-            lz[left(p)] += lz[p] + val;
-            lz[right(p)] += lz[p] + val;
+        if(L == R) {
+            st[p] += lz[p] + val;
+            lz[p] = 0;
+            return st[p];
         }
-        lz[p] = 0;
-        return st[p];
+        lz[p] += val;
+        return st[p] + lz[p];
     }
+    st[p] += lz[p];
+    lz[left(p)] += lz[p];
+    lz[right(p)] += lz[p];
+    lz[p] = 0;
     int p1 = update(left(p), L, (L + R) >> 1, i, j, val);
     int p2 = update(right(p), ((L + R) >> 1) + 1, R, i, j, val);
     return st[p] = max(p1, p2);

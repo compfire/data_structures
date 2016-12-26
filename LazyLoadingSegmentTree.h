@@ -13,7 +13,7 @@ class LazyLoadingSegmentTree {
     int n;
     int left(int p);
     int right(int p);
-    void build(int p, int L, int R);
+    int build(int p, int L, int R);
     int rmq(int p, int L, int R, int i, int j);
     int update(int p, int L, int R, int i, int j, int val);
 public:
