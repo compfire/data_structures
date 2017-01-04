@@ -1,16 +1,20 @@
 #include <bits/stdc++.h>
-#include "LazyLoadingSegmentTree.h"
+#include "GraphTraversal.h"
 
 using namespace std;
 
 typedef vector<int> vi;
 
 int main() {
-    vi vec = {1, 2, 3, 4, 5, 6};
-    LazyLoadingSegmentTree t(vec);
-    cout << t.rmq(3, 5) << endl;
-    t.update(0, 2, 100);
-    cout << t.rmq(0, 5);
+    vector<vi> G = {
+            {},
+            {0, 3},
+            {0, 3},
+            {1, 2},
+    };
+
+    GraphTraversal gt(4);
+    cout << gt.dfs_reachable(G, 0, 3) << endl;
 
     return 0;
 }

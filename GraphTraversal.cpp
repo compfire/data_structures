@@ -5,6 +5,8 @@
 #include "GraphTraversal.h"
 #include <bits/stdc++.h>
 
+GraphTraversal::GraphTraversal(int vertices) {}
+
 int GraphTraversal::dijkstra_shortest_path_length(vector<vector<pair<int, int>>> &in_graph, int from, int to) {
     vector<Node> graph(in_graph.size());
     bool explored_all = false;
@@ -56,7 +58,33 @@ int GraphTraversal::dijkstra(vector<vector<Edge>> &graph, int source, int target
     return INT_MAX;
 }
 
+int GraphTraversal::bfs_distance(vector<vector<int>> &graph, int source, int target) {
+    vector<int> distances(graph.size(), INT_MAX);
+    distances[source] = 0;
+    queue<int> q; q.push(source);
+    while(!q.empty()) {
+        int where = q.front(); q.pop();
+        if(where == target) return distances[target];
+        for(int i = 0; i < graph[where].size(); i++) {
+            if(distances[graph[where][i]] == INT_MAX) {
+                distances[graph[where][i]] = distances[where] + 1;
+                q.push(graph[where][i]);
+            }
+        }
+    }
+    return INT_MAX;
+}
 
+void GraphTraversal::clear_dfs_bitset() { dfs_visited.reset(); }
+
+bool GraphTraversal::dfs_reachable(vector<vector<int>> &graph, int source, int target) {
+    if(source == target) return true;
+    dfs_visited[source] = true;
+    for(int i = 0; i < graph[source].size(); i++)
+        if(!dfs_visited[graph[source][i]])
+            return dfs_reachable(graph, graph[source][i], target);
+    return false;
+}
 
 
 
