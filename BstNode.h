@@ -21,8 +21,8 @@ public:
     int find_height(BstNode* root);
     int get_data(BstNode* get_from);
     BstNode* get_node(BstNode* root, int direction);
-    void bfs_print_all(BstNode* root, int order);
-    void dfs_print_all(BstNode* root);
+    void dfs_print_all(BstNode* root, int order);
+    void bfs_print_all(BstNode* root);
 };
 
 

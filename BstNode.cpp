@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 BstNode* BstNode::get_new_node(int data) {
     BstNode* new_node = new BstNode();
     new_node->left = NULL;
@@ -112,7 +111,7 @@ int BstNode::find_height(BstNode *root) {
     return(max(find_height(root->left), find_height(root->right)) + 1);
 }
 
-void BstNode::bfs_print_all(BstNode *root, int order) {
+void BstNode::dfs_print_all(BstNode *root, int order) {
     if(root == NULL)
         return;
     switch(order) {
@@ -133,7 +132,7 @@ void BstNode::bfs_print_all(BstNode *root, int order) {
     }
 }
 
-void BstNode::dfs_print_all(BstNode *root) {
+void BstNode::bfs_print_all(BstNode *root) {
     if(root == NULL)
         return;
     queue<BstNode*> nodes_to_process;
